@@ -1,7 +1,13 @@
-using InGame.ForState;
+// ----- C#
 using System.Collections;
 using System.Collections.Generic;
+
+// ----- Unity
 using UnityEngine;
+
+// ----- User Defined
+using InGame.ForCamera;
+using InGame.ForMap;
 
 namespace InGame
 {
@@ -10,6 +16,9 @@ namespace InGame
         // --------------------------------------------------
         // Components
         // --------------------------------------------------
+        [Header("Manage Group")]
+        [SerializeField] private CamController _camController = null;
+        [SerializeField] private MapManager    _mapManager    = null;
 
         // --------------------------------------------------
         // Properties
@@ -19,6 +28,9 @@ namespace InGame
             get;
             private set;
         } = null;
+
+        public CamController CamController => _camController;
+        public MapManager    MapManager    => _mapManager;
 
         // --------------------------------------------------
         // Functions - Event
