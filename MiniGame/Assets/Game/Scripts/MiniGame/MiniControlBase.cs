@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniControlBase : MonoBehaviour
+public abstract class MiniControlBase : MonoBehaviour
 {
+    // --------------------------------------------------
+    // 
+    // --------------------------------------------------
+    protected enum EStateType { }
 
 }
