@@ -13,6 +13,7 @@ using InGame.ForMiniGame.ForUI;
 using InGame.ForMiniGame.ForCapture;
 using Utiltiy.ForLoader;
 using InGame.ForState;
+using InGame.ForMiniGame.ForControl;
 
 namespace InGame.ForMiniGame
 {
@@ -35,6 +36,7 @@ namespace InGame.ForMiniGame
         // --------------------------------------------------
         // Components
         // --------------------------------------------------
+
         [Header("Capture Group")]
         [SerializeField] protected CaptureSystem _captureSystem = null;
 
@@ -44,9 +46,10 @@ namespace InGame.ForMiniGame
         // --------------------------------------------------
         // Variables
         // --------------------------------------------------
-        protected GameView  _gameView      = null;
-        protected Coroutine _co_StateOwner = null;
-        protected EState    _gameState     = EState.Unknown;
+        protected MiniGameControlBase  _controlBase   = null;
+        protected GameView             _gameView      = null;
+        protected Coroutine            _co_StateOwner = null;
+        protected EState               _gameState     = EState.Unknown;
 
         // --------------------------------------------------
         // Functions - Nomal
@@ -63,6 +66,9 @@ namespace InGame.ForMiniGame
                 return;
 
             _gameState = gameState;
+
+            if (_controlBase != null)
+                _controlBase.ChangeToCurrentState(_gameState);
 
             if (_co_StateOwner != null)
                 StopCoroutine(_co_StateOwner);

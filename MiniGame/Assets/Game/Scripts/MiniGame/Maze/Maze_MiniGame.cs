@@ -10,6 +10,7 @@ using UnityEngine;
 using Utiltiy.ForLoader;
 using InGame.ForMiniGame.ForUI;
 using InGame.ForState;
+using InGame.ForMiniGame.ForControl;
 
 namespace InGame.ForMiniGame
 {
@@ -22,7 +23,8 @@ namespace InGame.ForMiniGame
         [SerializeField] private int             _gameDuration = 10;
         
         [Header("Control Group")]
-        [SerializeField] private DrawControlView _controlView = null;
+        [SerializeField] private DrawControl     _controller   = null;
+        [SerializeField] private DrawControlView _controlView  = null;
 
         // --------------------------------------------------
         // Functions - Coroutine
@@ -31,8 +33,9 @@ namespace InGame.ForMiniGame
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
-            _gameView = (GameView)_controlView;
-
+            _gameView    = (GameView)           _controlView;
+            _controlBase = (MiniGameControlBase)_controller;
+                
             _controlView.SetToCloseButton
             (
                 () =>
