@@ -33,6 +33,11 @@ namespace InGame.ForMiniGame.ForUI
         // --------------------------------------------------
         // Functions - Nomal
         // --------------------------------------------------
+        public void SetToTimer(int duration)
+        {
+            _TMP_Contents.text = string.Format("{0:00}", duration) + $":00.00";
+        }
+
         public void Timer(ECountType countType, float duration, Action doneCallBack) 
         {
             if (_co_Timer != null)
