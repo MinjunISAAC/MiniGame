@@ -12,7 +12,7 @@ public class Test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _loader.Visiable(3f, () => { Debug.Log($"END LOADER"); });
+        //_loader.Visiable(3f, () => { Debug.Log($"END LOADER"); });
         //_timer.Timer(TimerSystem.ECountType.CountUp, 3f, () => { Debug.Log($"End"); });
     }
 
