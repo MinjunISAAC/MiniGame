@@ -1278,8 +1278,7 @@ MonoBehaviour:
   _uiTransform: {fileID: 715551908}
   _lineMaterial: {fileID: 2100000, guid: 99c5c43b5a7216540b6f5b86b2ffdc3f, type: 2}
   _lineThickness: 0.1
-  _lineVertices: 5
-  _line: {fileID: 0}
+  _lineVertices: 10
 --- !u!4 &715551908
 Transform:
   m_ObjectHideFlags: 0

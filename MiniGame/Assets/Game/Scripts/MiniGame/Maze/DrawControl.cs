@@ -36,7 +36,7 @@ namespace InGame.ForMiniGame.ForControl
         private bool _isEnd   = false;
         private bool _isDrag  = false;
 
-        [SerializeField] private GameObject _line = null;
+        private GameObject _line = null;
 
         private int _lineCount = 2;
 
@@ -65,7 +65,6 @@ namespace InGame.ForMiniGame.ForControl
             _inputPos.z = _uiTransform.position.z - _camera.transform.position.z;
             _inputPos.x = Input.mousePosition.x;
             _inputPos.y = Input.mousePosition.y;
-            Debug.Log($"Input Position ({_inputPos.x}, {_inputPos.y}, {_inputPos.z})");
 
             var mousePos = _camera.ScreenToWorldPoint(_inputPos);
 
@@ -114,7 +113,7 @@ namespace InGame.ForMiniGame.ForControl
         {
             _IMG_Line.gameObject.SetActive(true);
 
-            if (_prevPos != null && Mathf.Abs(Vector3.Distance(_prevPos, mousePosition)) >= 0.001f)
+            if (_prevPos != null && Mathf.Abs(Vector3.Distance(_prevPos, mousePosition)) >= 0.0001f)
             {
                 _prevPos = mousePosition;
                 _lineCount++;
