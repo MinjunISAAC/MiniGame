@@ -7,10 +7,11 @@ using Utiltiy.ForLoader;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] private HotDog_MiniGame _miniGame = null;
+    [SerializeField] private Maze_MiniGame   _miniGame_0 = null;
+    [SerializeField] private HotDog_MiniGame _miniGame_1 = null;
 
     void Start()
     {
-        _miniGame.ChangeState(MiniGameBase.EState.Init, null);
+        _miniGame_1.ChangeState(MiniGameBase.EState.Init, null);
     }
 }

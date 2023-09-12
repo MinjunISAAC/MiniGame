@@ -8,9 +8,9 @@ using UnityEngine;
 
 // ----- User Defined
 using Utiltiy.ForLoader;
-using InGame.ForMiniGame;
 using InGame.ForMiniGame.ForUI;
 using InGame.ForState;
+using InGame.ForMiniGame.ForControl;
 
 namespace InGame.ForMiniGame
 {
@@ -23,6 +23,7 @@ namespace InGame.ForMiniGame
         [SerializeField] private float          _gameDuration = 10f;
 
         [Header("Control Group")]
+        [SerializeField] private TapControl     _controller   = null;
         [SerializeField] private TapControlView _controlView  = null;
 
         // --------------------------------------------------
@@ -31,22 +32,15 @@ namespace InGame.ForMiniGame
         // ----- Private
 
         // --------------------------------------------------
-        // Functions - Event
-        // --------------------------------------------------
-        private void Start()
-        {
-            
-        }
-
-        // --------------------------------------------------
         // Functions - Coroutine
         // --------------------------------------------------
         protected override IEnumerator _Co_Init(Action doneCallBack)
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
-            _gameView    = (GameView)_controlView;
-
+            _gameView    = (GameView)           _controlView;
+            _controlBase = (MiniGameControlBase)_controller;
+            
             _controlView.VisiableToTimer(false);
             _controlView.SetToCloseButton
             (
@@ -105,6 +99,8 @@ namespace InGame.ForMiniGame
         protected override IEnumerator _Co_Play(Action doneCallBack)
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
+
+            _controller.SetToStart(true);
 
             _charactorAnim.SetTrigger(IDLE_TRIGGER);
 
