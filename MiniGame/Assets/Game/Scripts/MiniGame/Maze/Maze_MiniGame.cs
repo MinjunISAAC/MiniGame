@@ -103,7 +103,9 @@ namespace InGame.ForMiniGame
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
-            _charactorAnim.SetTrigger(IDLE_TRIGGER);
+            _charactorAnim.SetTrigger  (IDLE_TRIGGER);
+            _charactorAnim.ResetTrigger(IDLE_TRIGGER);
+
             _controlView  .VisiableToTutorial(true);
             _controlView  .PlayTimer
             (
@@ -124,7 +126,7 @@ namespace InGame.ForMiniGame
             _finishParticle.Play();
             _charactorAnim .SetTrigger(SUCCESS_TRIGGER);
 
-            var delaySec = 1f;
+            var delaySec = 3f;
             yield return new WaitForSeconds(delaySec);
 
             ChangeState(EState.Finish, null);
@@ -148,11 +150,13 @@ namespace InGame.ForMiniGame
             ChangeState(EState.Play, null);
             doneCallBack?.Invoke();
         }
+
         protected override IEnumerator _Co_Finish(Action doneCallBack)
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
-            //_captureSystem.
+            var capturePicture = _captureSystem.Capture();
+            
             doneCallBack?.Invoke();
             yield return null;
         }

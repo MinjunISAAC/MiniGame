@@ -13,12 +13,13 @@ namespace InGame.ForMiniGame.ForCapture.ForUI
         // --------------------------------------------------
         // Components
         // --------------------------------------------------
-        [SerializeField] private BlackOut _blackOut = null;
+        [SerializeField] private BlackOut   _blackOut = null;
+        [SerializeField] private GameObject _contents = null;
 
         // --------------------------------------------------
         // Functions - Nomal
         // --------------------------------------------------
-        public void PlayBlackOut(Action doneCallBack)
+        public void PlayBlackOut(Action doneCallBack = null)
         {
             if (_blackOut == null)
             {
@@ -28,6 +29,8 @@ namespace InGame.ForMiniGame.ForCapture.ForUI
 
             _blackOut.Play(doneCallBack);
         }
+
+        public void VisiableToContents(bool isShow) => _contents.SetActive(isShow);
 
         public void SetToCapturePhoto()
         {
