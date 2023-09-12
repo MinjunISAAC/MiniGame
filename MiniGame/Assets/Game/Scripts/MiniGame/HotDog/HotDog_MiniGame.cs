@@ -11,6 +11,7 @@ using Utiltiy.ForLoader;
 using InGame.ForMiniGame.ForUI;
 using InGame.ForState;
 using InGame.ForMiniGame.ForControl;
+using InGame.ForCamera;
 
 namespace InGame.ForMiniGame
 {
@@ -20,11 +21,14 @@ namespace InGame.ForMiniGame
         // Components
         // --------------------------------------------------
         [Header("Game Rule")]
-        [SerializeField] private float          _gameDuration = 10f;
+        [SerializeField] private float          _gameDuration  = 10f;
 
         [Header("Control Group")]
-        [SerializeField] private TapControl     _controller   = null;
-        [SerializeField] private TapControlView _controlView  = null;
+        [SerializeField] private TapControl     _controller    = null;
+        [SerializeField] private TapControlView _controlView   = null;
+
+        [Header("Cam Group")]
+        [SerializeField] private CamController  _camController = null;
 
         // --------------------------------------------------
         // Functions - Nomal
@@ -100,21 +104,26 @@ namespace InGame.ForMiniGame
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
-            _controller.SetToStart(true);
-
-            _charactorAnim.SetTrigger(IDLE_TRIGGER);
-
-            _controlView.VisiableToTimer(true);
-            _controlView.SetToTimer((int)_gameDuration);
-            _controlView.VisiableToTutorial(true);
-            _controlView.PlayTimer
+            _camController.Move
             (
-                TimerSystem.ECountType.SlideDown,
-                _gameDuration,
-                () => { ChangeState(EState.Fail, () => { _charactorAnim.ResetTrigger(IDLE_TRIGGER); }); }
+                true, 0.5f,
+                () => 
+                { 
+                    _controller.SetToStart(true);
+                    _charactorAnim.SetTrigger(IDLE_TRIGGER);
+                    _controlView.VisiableToTimer(true);
+                    _controlView.SetToTimer((int)_gameDuration);
+                    _controlView.VisiableToTutorial(true);
+                    _controlView.PlayTimer
+                    (
+                        TimerSystem.ECountType.SlideDown,
+                        _gameDuration,
+                        () => { ChangeState(EState.Fail, () => { _charactorAnim.ResetTrigger(IDLE_TRIGGER); }); }
+                    );
+                
+                    doneCallBack?.Invoke();
+                }
             );
-
-            doneCallBack?.Invoke();
             yield return null;
         }
 
