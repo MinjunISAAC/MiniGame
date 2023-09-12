@@ -4429,7 +4429,6 @@ MonoBehaviour:
   _lineMaterial: {fileID: 2100000, guid: 99c5c43b5a7216540b6f5b86b2ffdc3f, type: 2}
   _lineThickness: 0.1
   _lineVertices: 10
-  _lineCollider: {fileID: 2374255270390013047}
 --- !u!1 &3715120060684823979
 GameObject:
   m_ObjectHideFlags: 0
@@ -4561,6 +4560,7 @@ MonoBehaviour:
   _blackOut: {fileID: 3715120059092286270}
   _contents: {fileID: 3715120058854303065}
   _IMG_Photo: {fileID: 3715120058878307640}
+  _BTN_Finish: {fileID: 3715120058940091380}
 --- !u!1 &3715120060733920480
 GameObject:
   m_ObjectHideFlags: 0

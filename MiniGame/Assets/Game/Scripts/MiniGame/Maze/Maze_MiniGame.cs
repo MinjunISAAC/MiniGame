@@ -56,6 +56,8 @@ namespace InGame.ForMiniGame
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
+            ColliderEvent.Clear();
+
             _gameView    = (GameView)           _controlView;
             _controlBase = (MiniGameControlBase)_controller;
                 
@@ -74,6 +76,23 @@ namespace InGame.ForMiniGame
                     );
                 }
             );
+
+            _captureView.SetToOnClickFinishButton
+            (
+                () =>
+                {
+                    Loader.Instance.Visiable
+                    (
+                        1f,
+                        () =>
+                        {
+                            StateMachine.Instance.ChangeState(ForState.EState.Ready, null);
+                        },
+                        null
+                    );
+                }
+            );
+            
 
             ChangeState(EState.Intro, null);
 
@@ -107,14 +126,13 @@ namespace InGame.ForMiniGame
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
             _charactorAnim.SetTrigger  (IDLE_TRIGGER);
-            _charactorAnim.ResetTrigger(IDLE_TRIGGER);
 
             _controlView  .VisiableToTutorial(true);
             _controlView  .PlayTimer
             (
                 TimerSystem.ECountType.CountDown,
                 _gameDuration,
-                () => { ChangeState(EState.Fail, null); }
+                () => { ChangeState(EState.Fail, () => { _charactorAnim.ResetTrigger(IDLE_TRIGGER); }); }
             );
 
             doneCallBack?.Invoke();
@@ -150,7 +168,7 @@ namespace InGame.ForMiniGame
             _gameView  .VisiableToFailEffect(false);
             _controller.DeleteLine();
 
-            ChangeState(EState.Play, null);
+            ChangeState(EState.Play, () => { _charactorAnim.ResetTrigger(FAIL_TRIGGER); });
             doneCallBack?.Invoke();
         }
 
@@ -160,6 +178,7 @@ namespace InGame.ForMiniGame
 
             var capturePicture = _captureSystem.Capture();
             _captureView.SetToCapturePhoto(capturePicture);
+            _finishParticle.Stop();
 
             doneCallBack?.Invoke();
             yield return null;

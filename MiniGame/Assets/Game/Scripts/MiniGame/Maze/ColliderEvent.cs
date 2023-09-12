@@ -25,5 +25,12 @@ namespace InGame.ForMiniGame.ForControl
             if (onStartAction != null)
                 onStartAction();
         }
+
+        public static void Clear()
+        {
+            onStartAction  = null;
+            onFailAction   = null;
+            onFinishAction = null;
+        }
     }
 }

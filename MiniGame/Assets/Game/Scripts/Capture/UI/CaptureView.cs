@@ -14,9 +14,18 @@ namespace InGame.ForMiniGame.ForCapture.ForUI
         // --------------------------------------------------
         // Components
         // --------------------------------------------------
-        [SerializeField] private BlackOut   _blackOut  = null;
-        [SerializeField] private GameObject _contents  = null;
-        [SerializeField] private Image      _IMG_Photo = null;
+        [SerializeField] private BlackOut   _blackOut   = null;
+        [SerializeField] private GameObject _contents   = null;
+        [SerializeField] private Image      _IMG_Photo  = null;
+        [SerializeField] private Button     _BTN_Finish = null;
+
+        // --------------------------------------------------
+        // Functions - Event
+        // --------------------------------------------------
+        private void OnDestroy()
+        {
+            _BTN_Finish.onClick.RemoveAllListeners();   
+        }
 
         // --------------------------------------------------
         // Functions - Nomal
@@ -33,6 +42,7 @@ namespace InGame.ForMiniGame.ForCapture.ForUI
         }
 
         public void VisiableToContents(bool isShow)  => _contents.SetActive(isShow);
-        public void SetToCapturePhoto(Sprite sprite) => _IMG_Photo.sprite = sprite; 
+        public void SetToCapturePhoto(Sprite sprite) => _IMG_Photo.sprite = sprite;
+        public void SetToOnClickFinishButton(Action onClickEvent) => _BTN_Finish.onClick.AddListener(() => onClickEvent());
     }
 }
