@@ -27,8 +27,8 @@ namespace InGame.ForMiniGame.ForCapture
         // --------------------------------------------------
         // ----- Private
         private string    _capturePath      = null;
-        private int       _widthResolution  = 256;
-        private int       _heightResolution = 256;
+        private int       _widthResolution  = 512;
+        private int       _heightResolution = 512;
 
         // --------------------------------------------------
         // Functions - Event
@@ -41,7 +41,7 @@ namespace InGame.ForMiniGame.ForCapture
         // --------------------------------------------------
         // Functions - Nomal
         // --------------------------------------------------
-        public Texture2D Capture()
+        public Sprite Capture()
         {
             _captureView.gameObject.SetActive(true);
             _captureView.PlayBlackOut();
@@ -68,7 +68,9 @@ namespace InGame.ForMiniGame.ForCapture
             _captureCamera.targetTexture = null;
             _captureCamera.Render();
 
-            Sprite captureSprite = Sprite.Create(writeTexture, new Rect(0, 0, _widthResolution, _heightResolution), Vector2.one * 0.5f);
+            var resultResolution = _widthResolution / 2;
+            var pos              = resultResolution / 2;
+            Sprite captureSprite = Sprite.Create(writeTexture, new Rect(pos, pos, resultResolution, resultResolution), Vector2.one);
             byte[] bytes         = captureSprite.texture.EncodeToPNG();
             string fileName      = $"CaptureSystem_{fileCount}.png";
 
@@ -76,7 +78,7 @@ namespace InGame.ForMiniGame.ForCapture
             AssetDatabase.Refresh();
 
             _captureView.VisiableToContents(true);
-            return writeTexture;
+            return captureSprite;
         }
     }
 }

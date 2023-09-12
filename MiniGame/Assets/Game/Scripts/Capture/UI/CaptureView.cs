@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 // ----- Unity
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace InGame.ForMiniGame.ForCapture.ForUI
 {
@@ -13,8 +14,9 @@ namespace InGame.ForMiniGame.ForCapture.ForUI
         // --------------------------------------------------
         // Components
         // --------------------------------------------------
-        [SerializeField] private BlackOut   _blackOut = null;
-        [SerializeField] private GameObject _contents = null;
+        [SerializeField] private BlackOut   _blackOut  = null;
+        [SerializeField] private GameObject _contents  = null;
+        [SerializeField] private Image      _IMG_Photo = null;
 
         // --------------------------------------------------
         // Functions - Nomal
@@ -30,11 +32,7 @@ namespace InGame.ForMiniGame.ForCapture.ForUI
             _blackOut.Play(doneCallBack);
         }
 
-        public void VisiableToContents(bool isShow) => _contents.SetActive(isShow);
-
-        public void SetToCapturePhoto()
-        {
-
-        }
+        public void VisiableToContents(bool isShow)  => _contents.SetActive(isShow);
+        public void SetToCapturePhoto(Sprite sprite) => _IMG_Photo.sprite = sprite; 
     }
 }

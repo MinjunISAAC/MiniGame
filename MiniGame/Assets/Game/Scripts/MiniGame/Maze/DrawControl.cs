@@ -55,7 +55,7 @@ namespace InGame.ForMiniGame.ForControl
             _lineCount    = 2;
             _lineRenderer = null;
 
-            Destroy(_line.gameObject);
+            if (_line != null) Destroy(_line.gameObject);
         }
 
         // ----- Private

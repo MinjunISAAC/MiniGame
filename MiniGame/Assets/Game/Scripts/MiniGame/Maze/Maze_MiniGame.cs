@@ -156,7 +156,8 @@ namespace InGame.ForMiniGame
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
             var capturePicture = _captureSystem.Capture();
-            
+            _captureView.SetToCapturePhoto(capturePicture);
+
             doneCallBack?.Invoke();
             yield return null;
         }
