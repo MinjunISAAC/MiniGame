@@ -241,7 +241,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.249998, y: 0.14500237}
+  m_AnchoredPosition: {x: 9.25, y: 0.14500237}
   m_SizeDelta: {x: -30.299995, y: -11.089994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &79987877
@@ -469,7 +469,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 20.7, y: -0.8}
+  m_AnchoredPosition: {x: 20.699997, y: -0.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &283452337
@@ -1029,7 +1029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3047b0e0581c00c4981b34761b275f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mazeMiniGame: {fileID: 6362674796498364248}
+  _mazeMiniGame: {fileID: 0}
 --- !u!4 &1006776288
 Transform:
   m_ObjectHideFlags: 0
@@ -4676,7 +4676,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6362674796498364246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8884b4c4fa138844e99e4a33bc15af36, type: 3}
+  m_Script: {fileID: 11500000, guid: b5e7c07d25a37854fa2e1183249408a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _captureSystem: {fileID: 6362674796447702766}
@@ -4684,8 +4684,6 @@ MonoBehaviour:
   _charactorAnim: {fileID: 6911044980679606705}
   _finishParticle: {fileID: 73615198}
   _gameDuration: 10
-  _controller: {fileID: 6362674797402332659}
-  _controlView: {fileID: 6362674796724699090}
 --- !u!1 &6362674796620635767
 GameObject:
   m_ObjectHideFlags: 0
