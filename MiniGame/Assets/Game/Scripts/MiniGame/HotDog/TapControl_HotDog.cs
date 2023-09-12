@@ -8,18 +8,16 @@ using UnityEngine.UI;
 
 namespace InGame.ForMiniGame.ForControl
 {
-    public class TapControl : MiniGameControlBase
+    public class TapControl_HotDog : TapControl
     {
         // --------------------------------------------------
         // Components
         // --------------------------------------------------
-        [Header("Control Value Group")]
-        [SerializeField] private float _tapInterval = 0.0f;
+        [Header("Image Group")]
+        [SerializeField] private Image _IMG_HotDogOrigin = null;
 
-        // --------------------------------------------------
-        // Variables
-        // --------------------------------------------------
-        private bool _isStart = false;
+        [Header("Position Group")]
+        [SerializeField] private Transform _hotDogParents = null;
 
         // --------------------------------------------------
         // Functions - Nomal
@@ -32,11 +30,17 @@ namespace InGame.ForMiniGame.ForControl
 
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log($"Click");
+                var pos    = Input.mousePosition;
+                    pos.z  = 1f;
+                var imgPos = Camera.main.ScreenToWorldPoint(pos);
+                var hotDog = Instantiate(_IMG_HotDogOrigin, _hotDogParents);
+
+                hotDog.transform.position = imgPos;
             }
         }
 
-        // ----- Public
-        public void SetToStart(bool isStart) => _isStart = isStart;
+        // --------------------------------------------------
+        // Functions - Coroutine
+        // --------------------------------------------------
     }
 }

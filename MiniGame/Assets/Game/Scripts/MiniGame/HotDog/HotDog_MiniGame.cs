@@ -106,7 +106,7 @@ namespace InGame.ForMiniGame
 
             _camController.Move
             (
-                true, 0.5f,
+                true, 0.25f,
                 () => 
                 { 
                     _controller.SetToStart(true);
