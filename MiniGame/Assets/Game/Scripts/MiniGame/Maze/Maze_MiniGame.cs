@@ -29,6 +29,12 @@ namespace InGame.ForMiniGame
         // --------------------------------------------------
         // Functions - Nomal
         // --------------------------------------------------
+        // ----- Public
+        public void SetToCamera(Camera cam)
+        {
+            _controller.SetToCamera(cam);
+        }
+
         // ----- Private
         private void _ChangeStateToPlay() 
         {
@@ -46,7 +52,7 @@ namespace InGame.ForMiniGame
         private void _ChangeStateToFinish()
         {
             _controller.SetToStart(false);
-            ChangeState(EState.Finish, null);
+            ChangeState(EState.Success, null);
         }
 
         // --------------------------------------------------
@@ -101,8 +107,9 @@ namespace InGame.ForMiniGame
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
-            _controlView.VisiableToTutorial(true);
-            _controlView.PlayTimer
+            _charactorAnim.SetTrigger(IDLE_TRIGGER);
+            _controlView  .VisiableToTutorial(true);
+            _controlView  .PlayTimer
             (
                 TimerSystem.ECountType.CountDown,
                 _gameDuration,
@@ -113,11 +120,42 @@ namespace InGame.ForMiniGame
             yield return null;
         }
 
+        protected override IEnumerator _Co_Success(Action doneCallBack)
+        {
+            Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
+
+            _controlView   .StopTimer();
+            _finishParticle.Play();
+            _charactorAnim .SetTrigger(SUCCESS_TRIGGER);
+
+            var delaySec = 1f;
+            yield return new WaitForSeconds(delaySec);
+
+            ChangeState(EState.Finish, null);
+            doneCallBack?.Invoke();
+        }
+
+        protected override IEnumerator _Co_Fail(Action doneCallBack)
+        {
+            Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
+
+            _controlView  .StopTimer();
+            _charactorAnim.SetTrigger(FAIL_TRIGGER);
+            _gameView     .VisiableToFailEffect(true);
+
+            var delaySec = 1f;
+            yield return new WaitForSeconds(delaySec);
+
+            _gameView  .VisiableToFailEffect(false);
+            _controller.DeleteLine();
+
+            ChangeState(EState.Play, null);
+            doneCallBack?.Invoke();
+        }
         protected override IEnumerator _Co_Finish(Action doneCallBack)
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
-            _controlView.StopTimer();
 
             doneCallBack?.Invoke();
             yield return null;

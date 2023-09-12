@@ -10,6 +10,12 @@ namespace InGame.ForMiniGame.ForControl
     public abstract class MiniGameControlBase : MonoBehaviour
     {
         // --------------------------------------------------
+        // Components
+        // --------------------------------------------------
+        [Header("Camera Group")]
+        [SerializeField] protected Camera _camera = null;
+
+        // --------------------------------------------------
         // Variables
         // --------------------------------------------------
         protected MiniGameBase.EState _currentState = MiniGameBase.EState.Unknown;
@@ -31,6 +37,15 @@ namespace InGame.ForMiniGame.ForControl
         // --------------------------------------------------
         // Functions - Nomal
         // --------------------------------------------------
+        public void SetToCamera(Camera cam)
+        {
+            if (_camera == null)
+            {
+                _camera = cam;
+                return;
+            }
+        }
+
         public void ChangeToCurrentState(MiniGameBase.EState state)
         {
             if (_currentState == state)

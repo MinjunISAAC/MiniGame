@@ -55,6 +55,7 @@ namespace InGame.ForMiniGame.ForUI
             if (_co_Timer != null)
             {
                 StopCoroutine(_co_Timer);
+                _co_Timer = null;
             }
         }
 

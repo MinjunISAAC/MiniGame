@@ -36,16 +36,27 @@ namespace InGame.ForMiniGame
         // --------------------------------------------------
         // Components
         // --------------------------------------------------
-
         [Header("Capture Group")]
-        [SerializeField] protected CaptureSystem _captureSystem = null;
+        [SerializeField] protected CaptureSystem  _captureSystem  = null;
 
         [Header("UI Group")]
-        [SerializeField] protected CaptureView   _captureView   = null;
+        [SerializeField] protected CaptureView    _captureView    = null;
+
+        [Header("Charactor Group")]
+        [SerializeField] protected Animator       _charactorAnim  = null;
+
+        [Header("Fx Group")]
+        [SerializeField] protected ParticleSystem _finishParticle = null;
 
         // --------------------------------------------------
         // Variables
         // --------------------------------------------------
+        // ----- Const
+        protected const string IDLE_TRIGGER    = "Idle";
+        protected const string SUCCESS_TRIGGER = "Finish";
+        protected const string FAIL_TRIGGER    = "Fail";
+
+        // ----- Protected
         protected MiniGameControlBase  _controlBase   = null;
         protected GameView             _gameView      = null;
         protected Coroutine            _co_StateOwner = null;
@@ -83,7 +94,7 @@ namespace InGame.ForMiniGame
                 case EState.Finish:  _co_StateOwner = StartCoroutine(_Co_Finish(doneCallBack));  break;
             }
         }
-
+        
         // --------------------------------------------------
         // Functions - Coroutine
         // --------------------------------------------------

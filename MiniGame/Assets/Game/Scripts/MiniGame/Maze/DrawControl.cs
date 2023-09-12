@@ -13,9 +13,6 @@ namespace InGame.ForMiniGame.ForControl
         // --------------------------------------------------
         // Components
         // --------------------------------------------------
-        [Header("Camera Group")]
-        [SerializeField] private Camera _camera = null;
-
         [Header("Line Draw Group")]
         [SerializeField] private Image     _IMG_Line      = null;
         [SerializeField] private Transform _uiTransform   = null;
@@ -51,11 +48,20 @@ namespace InGame.ForMiniGame.ForControl
 
         // ----- Public
         public void SetToStart(bool isStart) => _isStart = isStart;
+        public void DeleteLine()
+        {
+            _prevPos = Vector3.zero;
+            _inputPos = Vector3.zero;
+            _lineCount = 2;
+            _lineRenderer = null;
+
+            Destroy(_line.gameObject);
+        }
 
         // ----- Private
         private void _DrawLine()
         {
-            _inputPos.z = _uiTransform.position.z - _camera.transform.position.z;
+            _inputPos.z = _uiTransform.position.z - _camera.transform.position.z * 0.9f;
             _inputPos.x = Input.mousePosition.x;
             _inputPos.y = Input.mousePosition.y;
 

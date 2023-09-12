@@ -19,6 +19,7 @@ namespace InGame.ForMiniGame.ForUI
         [Header("Animation Group")]
         [SerializeField] protected Animation _countDownAnim = null;
         [SerializeField] protected Animation _tutorialAnim  = null;
+        [SerializeField] protected Animation _failAnim      = null;
 
         [Header("UI Group")]
         [SerializeField] protected Button    _BTN_Close = null;
@@ -54,6 +55,20 @@ namespace InGame.ForMiniGame.ForUI
                 _tutorialAnim.Stop();
                 _tutorialAnim.gameObject.SetActive(isShow);
             } 
+        }
+
+        public void VisiableToFailEffect(bool isShow)
+        {
+            if (isShow)
+            {
+                _failAnim.gameObject.SetActive(isShow);
+                _failAnim.Play();
+            }
+            else 
+            { 
+                _failAnim.Stop();
+                _failAnim.gameObject.SetActive(isShow);
+            }
         }
 
         // --------------------------------------------------

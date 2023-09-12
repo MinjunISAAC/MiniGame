@@ -27,18 +27,9 @@ namespace InGame.ForMiniGame.ForControl
 
             switch (trigger.TriggerType)
             {
-                case ETriggerType.Start : 
-                    ColliderEvent.OnStartAction();
-                    Debug.Log($"Start In");
-                    break;
-                case ETriggerType.Wall  : 
-                    ColliderEvent.OnFailAction();
-                    Debug.Log($"Start Fail");
-                    break;
-                case ETriggerType.End   : 
-                    ColliderEvent.OnFinishAction();
-                    Debug.Log($"Start Finish");
-                    break;
+                case ETriggerType.Start : ColliderEvent.OnStartAction();  break;
+                case ETriggerType.Wall  : ColliderEvent.OnFailAction();   break;
+                case ETriggerType.End   : ColliderEvent.OnFinishAction(); break;
             }
         }
 
