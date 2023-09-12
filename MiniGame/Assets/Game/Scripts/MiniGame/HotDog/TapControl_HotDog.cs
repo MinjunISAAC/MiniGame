@@ -1,4 +1,5 @@
 // ----- C#
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -18,6 +19,7 @@ namespace InGame.ForMiniGame.ForControl
 
         [Header("Position Group")]
         [SerializeField] private Transform _hotDogParents = null;
+        [SerializeField] private Transform _hotDogTarget  = null;
 
         // --------------------------------------------------
         // Functions - Nomal
@@ -36,11 +38,36 @@ namespace InGame.ForMiniGame.ForControl
                 var hotDog = Instantiate(_IMG_HotDogOrigin, _hotDogParents);
 
                 hotDog.transform.position = imgPos;
+                StartCoroutine(_Co_MoveToHotDog(hotDog.GetComponent<RectTransform>(), 0.35f, null));
             }
         }
 
         // --------------------------------------------------
         // Functions - Coroutine
         // --------------------------------------------------
+        private IEnumerator _Co_MoveToHotDog(RectTransform targetRect, float duration, Action doneCallBack)
+        {
+            var sec         = 0.0f;
+            var startPos    = targetRect.anchoredPosition;
+            var endPos      = Camera.main.ScreenToWorldPoint(_hotDogTarget.position);
+            var startScale  = targetRect.transform.localScale;
+            var endScale    = new Vector3(0.2f, 0.2f, 0.2f);
+            var randomValue = UnityEngine.Random.Range(0.5f, 2f);
+
+            while (sec < duration)
+            {
+                sec += Time.deltaTime;
+
+                targetRect.transform.Rotate(0f,0f, randomValue);
+                targetRect.anchoredPosition     = Vector2.Lerp(startPos,   endPos,   sec / duration);
+                targetRect.transform.localScale = Vector3.Lerp(startScale, endScale, sec / duration); 
+
+                yield return null;
+            }
+
+            targetRect.transform.localScale = Vector3.zero;
+            targetRect.anchoredPosition     = endPos;
+            doneCallBack?.Invoke();
+        }
     }
 }

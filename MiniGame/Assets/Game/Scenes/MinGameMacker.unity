@@ -5911,6 +5911,7 @@ MonoBehaviour:
   _tapInterval: 0
   _IMG_HotDogOrigin: {fileID: 2211916845159014679, guid: bc91d39bbe967e54e9c5f691486cdf40, type: 3}
   _hotDogParents: {fileID: 1603039922}
+  _hotDogTarget: {fileID: 341504971}
 --- !u!1 &6362674797446660777
 GameObject:
   m_ObjectHideFlags: 0
