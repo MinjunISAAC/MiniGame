@@ -50,9 +50,9 @@ namespace InGame.ForMiniGame.ForControl
         public void SetToStart(bool isStart) => _isStart = isStart;
         public void DeleteLine()
         {
-            _prevPos = Vector3.zero;
-            _inputPos = Vector3.zero;
-            _lineCount = 2;
+            _prevPos      = Vector3.zero;
+            _inputPos     = Vector3.zero;
+            _lineCount    = 2;
             _lineRenderer = null;
 
             Destroy(_line.gameObject);
