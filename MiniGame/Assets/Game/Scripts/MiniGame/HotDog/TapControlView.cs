@@ -24,8 +24,7 @@ namespace InGame.ForMiniGame.ForUI
         // --------------------------------------------------
         // Functions - Nomal
         // --------------------------------------------------
-        public void SetToTimer(int sec) =>
-            _timerSystem.SetToTimer(sec);
+        public void SetToTimer(int sec) => _timerSystem.SetToTimer(sec);
 
         public void PlayTimer(TimerSystem.ECountType countType, float duration, Action doneCallBack) =>
             _timerSystem.PlayTimer(countType, duration, doneCallBack);
