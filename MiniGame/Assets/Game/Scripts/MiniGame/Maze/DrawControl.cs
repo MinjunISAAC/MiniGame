@@ -29,7 +29,7 @@ namespace InGame.ForMiniGame.ForControl
 
         private LineRenderer _lineRenderer = null;
         
-        private SphereCollider _checkCollider = null;
+        private LineCollider _lineCollider = null;
 
         private Vector3 _inputPos = Vector3.zero;
         private Vector3 _prevPos  = Vector3.zero;
@@ -105,8 +105,8 @@ namespace InGame.ForMiniGame.ForControl
             line.transform.parent     = _IMG_Line.transform;
             line.transform.position   = mousePosition;
 
-            _checkCollider = collider.AddComponent<SphereCollider>();
-            _checkCollider.radius = 0.05f;
+            _lineCollider = collider.AddComponent<LineCollider>();
+            _lineCollider.OnInit(0.05f, true);
 
             lineRenderer.startWidth        = _lineThickness;
             lineRenderer.endWidth          = _lineThickness;
@@ -131,7 +131,7 @@ namespace InGame.ForMiniGame.ForControl
                 _lineRenderer.positionCount = _lineCount;
                 _lineRenderer.SetPosition(_lineCount - 1, mousePosition);
 
-                _checkCollider.transform.position = mousePosition;
+                _lineCollider.transform.position = mousePosition;
             }
         }
     }

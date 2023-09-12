@@ -27,6 +27,14 @@ namespace InGame.ForMiniGame
         [SerializeField] private DrawControlView _controlView  = null;
 
         // --------------------------------------------------
+        // Functions - Nomal
+        // --------------------------------------------------
+        // ----- Private
+        private void _ChangeStateToPlay  () => ChangeState(EState.Play,   null);
+        private void _ChangeStateToFail  () => ChangeState(EState.Fail,   null);
+        private void _ChangeStateToFinish() => ChangeState(EState.Finish, null);
+
+        // --------------------------------------------------
         // Functions - Coroutine
         // --------------------------------------------------
         protected override IEnumerator _Co_Init(Action doneCallBack)
@@ -48,6 +56,11 @@ namespace InGame.ForMiniGame
             );
 
             ChangeState(EState.Intro, null);
+
+            ColliderEvent.onStartAction  += _ChangeStateToPlay;
+            ColliderEvent.onFailAction   += _ChangeStateToFail;
+            ColliderEvent.onFinishAction += _ChangeStateToFinish;
+
             doneCallBack?.Invoke();
             yield return null;
         }

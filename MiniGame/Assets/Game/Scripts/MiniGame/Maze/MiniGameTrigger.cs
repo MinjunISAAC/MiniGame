@@ -17,7 +17,7 @@ namespace InGame.ForMiniGame.ForControl.ForMaze
         // --------------------------------------------------
         // Components
         // --------------------------------------------------
-        [SerializeField] private ETriggerType _triggerState = ETriggerType.Unknown;
+        [SerializeField] private ETriggerType _triggerType = ETriggerType.Unknown;
 
         // --------------------------------------------------
         // Variables
@@ -27,15 +27,7 @@ namespace InGame.ForMiniGame.ForControl.ForMaze
         // --------------------------------------------------
         // Properties
         // --------------------------------------------------
-        public ETriggerType TriggerState => _triggerState;
-
-        // --------------------------------------------------
-        // Functions - Event
-        // --------------------------------------------------
-        private void OnTriggerEnter(Collider other)
-        {
-
-        }
+        public ETriggerType TriggerType => _triggerType;
 
         // --------------------------------------------------
         // Functions - Nomal

@@ -1976,7 +1976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ecb209782db36429e96fc9c39947b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerState: 1
+  _triggerType: 0
 --- !u!1 &1100666400
 GameObject:
   m_ObjectHideFlags: 0
@@ -3203,7 +3203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ecb209782db36429e96fc9c39947b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerState: 2
+  _triggerType: 0
 --- !u!1 &1397797491
 GameObject:
   m_ObjectHideFlags: 0
@@ -4845,7 +4845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ecb209782db36429e96fc9c39947b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerState: 3
+  _triggerType: 0
 --- !u!1 &2071943694
 GameObject:
   m_ObjectHideFlags: 0
@@ -6573,7 +6573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ecb209782db36429e96fc9c39947b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerState: 2
+  _triggerType: 2
 --- !u!65 &6362674795872547536
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7014,7 +7014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ecb209782db36429e96fc9c39947b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerState: 1
+  _triggerType: 1
 --- !u!1 &6362674796079493982
 GameObject:
   m_ObjectHideFlags: 0
@@ -7272,7 +7272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ecb209782db36429e96fc9c39947b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerState: 3
+  _triggerType: 3
 --- !u!1 &6362674796259805183
 GameObject:
   m_ObjectHideFlags: 0
