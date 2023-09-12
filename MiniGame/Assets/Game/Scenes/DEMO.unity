@@ -2132,6 +2132,42 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1717958110773091088, guid: 232b3c47d7550da41aacb58f9ac19cce, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717958110773091088, guid: 232b3c47d7550da41aacb58f9ac19cce, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717958110773091088, guid: 232b3c47d7550da41aacb58f9ac19cce, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717958110773091088, guid: 232b3c47d7550da41aacb58f9ac19cce, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717958110773091088, guid: 232b3c47d7550da41aacb58f9ac19cce, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 93.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717958110773091088, guid: 232b3c47d7550da41aacb58f9ac19cce, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100.485
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717958110773091088, guid: 232b3c47d7550da41aacb58f9ac19cce, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717958110773091088, guid: 232b3c47d7550da41aacb58f9ac19cce, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717958110773091311, guid: 232b3c47d7550da41aacb58f9ac19cce, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7a1f3aaaaf3f4a54d93ede05a509fe63, type: 3}
     - target: {fileID: 5754827139164648187, guid: 232b3c47d7550da41aacb58f9ac19cce, type: 3}
       propertyPath: m_Name
       value: MiniGame_1
