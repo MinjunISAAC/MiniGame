@@ -30,5 +30,7 @@ namespace InGame.ForMiniGame.ForUI
             _timerSystem.PlayTimer(countType, duration, doneCallBack);
 
         public void StopTimer() => _timerSystem.StopTimer();
+
+        public void VisiableToTimer(bool visiable) => _timerSystem.gameObject.SetActive(visiable);
     }
 }

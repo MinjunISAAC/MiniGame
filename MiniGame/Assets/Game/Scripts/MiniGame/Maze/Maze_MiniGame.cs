@@ -127,8 +127,8 @@ namespace InGame.ForMiniGame
 
             _charactorAnim.SetTrigger  (IDLE_TRIGGER);
 
-            _controlView  .VisiableToTutorial(true);
-            _controlView  .PlayTimer
+            _controlView.VisiableToTutorial(true);
+            _controlView.PlayTimer
             (
                 TimerSystem.ECountType.CountDown,
                 _gameDuration,

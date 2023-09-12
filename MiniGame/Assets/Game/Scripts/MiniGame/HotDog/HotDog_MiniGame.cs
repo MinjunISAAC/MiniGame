@@ -10,6 +10,7 @@ using UnityEngine;
 using Utiltiy.ForLoader;
 using InGame.ForMiniGame;
 using InGame.ForMiniGame.ForUI;
+using InGame.ForState;
 
 namespace InGame.ForMiniGame
 {
@@ -45,16 +46,41 @@ namespace InGame.ForMiniGame
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
             _gameView    = (GameView)_controlView;
-            _controlView.SetToTimer((int)_gameDuration);
-            _controlView.PlayToCountDown
+
+            _controlView.VisiableToTimer(false);
+            _controlView.SetToCloseButton
             (
                 () =>
                 {
-                    ChangeState(EState.Intro, null);
+                    Loader.Instance.Visiable
+                    (
+                        1f,
+                        () =>
+                        {
+                            StateMachine.Instance.ChangeState(ForState.EState.Ready, null);
+                        },
+                        null
+                    );
                 }
             );
 
-            //_controlBase = (MiniGameControlBase)_controller;
+            _captureView.SetToOnClickFinishButton
+            (
+                () =>
+                {
+                    Loader.Instance.Visiable
+                    (
+                        1f,
+                        () =>
+                        {
+                            StateMachine.Instance.ChangeState(ForState.EState.Ready, null);
+                        },
+                        null
+                    );
+                }
+            );
+
+            ChangeState(EState.Intro, null);
 
             doneCallBack?.Invoke();
             yield return null;
@@ -64,11 +90,12 @@ namespace InGame.ForMiniGame
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
-            _controlView.PlayTimer
+            _controlView.PlayToCountDown
             (
-                TimerSystem.ECountType.SlideDown,
-                _gameDuration,
-                () => { ChangeState(EState.Fail, () => { _charactorAnim.ResetTrigger(IDLE_TRIGGER); }); }
+                () =>
+                {
+                    ChangeState(EState.Play, null);
+                }
             );
 
             doneCallBack?.Invoke();
@@ -78,6 +105,18 @@ namespace InGame.ForMiniGame
         protected override IEnumerator _Co_Play(Action doneCallBack)
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
+
+            _charactorAnim.SetTrigger(IDLE_TRIGGER);
+
+            _controlView.VisiableToTimer(true);
+            _controlView.SetToTimer((int)_gameDuration);
+            _controlView.VisiableToTutorial(true);
+            _controlView.PlayTimer
+            (
+                TimerSystem.ECountType.SlideDown,
+                _gameDuration,
+                () => { ChangeState(EState.Fail, () => { _charactorAnim.ResetTrigger(IDLE_TRIGGER); }); }
+            );
 
             doneCallBack?.Invoke();
             yield return null;
