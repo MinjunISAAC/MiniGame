@@ -2168,6 +2168,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 7a1f3aaaaf3f4a54d93ede05a509fe63, type: 3}
+    - target: {fileID: 2862376563380115186, guid: 232b3c47d7550da41aacb58f9ac19cce, type: 3}
+      propertyPath: _miniGameType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5754827139164648187, guid: 232b3c47d7550da41aacb58f9ac19cce, type: 3}
       propertyPath: m_Name
       value: MiniGame_1

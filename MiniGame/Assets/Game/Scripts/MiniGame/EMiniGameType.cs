@@ -4,5 +4,6 @@ namespace InGame.ForMiniGame
     {
         Unknown = 0,
         Maze    = 1,
+        HotDog  = 2,
     }
 }
