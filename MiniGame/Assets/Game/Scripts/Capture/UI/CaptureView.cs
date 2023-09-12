@@ -28,5 +28,10 @@ namespace InGame.ForMiniGame.ForCapture.ForUI
 
             _blackOut.Play(doneCallBack);
         }
+
+        public void SetToCapturePhoto()
+        {
+
+        }
     }
 }
