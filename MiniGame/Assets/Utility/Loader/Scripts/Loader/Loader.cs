@@ -20,7 +20,7 @@ namespace Utiltiy.ForLoader
         private static Loader _instance = null;
 
         // ----- Variables
-        private const string FILE_PATH = "Loader.prefab";
+        private const string FILE_PATH = "Loader";
         private bool _isSingleton = false;
 
         // ----- Property
@@ -39,6 +39,8 @@ namespace Utiltiy.ForLoader
                     else
                     {
                         var origin = Resources.Load<Loader>(FILE_PATH);
+
+                        Debug.Log($"Origin Loader {origin}");
                         _instance = Instantiate<Loader>(origin);
                         _instance._isSingleton = true;
                         DontDestroyOnLoad(_instance.gameObject);
@@ -91,16 +93,16 @@ namespace Utiltiy.ForLoader
         // --------------------------------------------------
         // Functions - Coroutine
         // --------------------------------------------------
-        public void Visiable(float duration, Action doneCallBack)
+        public void Visiable(float duration, Action loadWork, Action doneCallBack)
         {
             if (_co_visiable == null)
-                _co_visiable = StartCoroutine(_Co_Visiable(duration, doneCallBack));
+                _co_visiable = StartCoroutine(_Co_Visiable(duration, loadWork, doneCallBack));
         }
 
         // --------------------------------------------------
         // Functions - Coroutine
         // --------------------------------------------------
-        private IEnumerator _Co_Visiable(float duration, Action doneCallBack)
+        private IEnumerator _Co_Visiable(float duration, Action loadWork, Action doneCallBack)
         {
             _animation.clip = _animation.GetClip(SHOW_TRIGGER);
             _animation.Play();
@@ -108,6 +110,7 @@ namespace Utiltiy.ForLoader
             var showSec = _animation.clip.length;
             yield return new WaitForSeconds(showSec);
 
+            loadWork?.Invoke();
             _animation.clip = _animation.GetClip(IDLE_TRIGGER);
             _animation.Play();
 

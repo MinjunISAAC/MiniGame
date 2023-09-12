@@ -37,15 +37,6 @@ namespace InGame.ForMiniGame.ForControl
         // --------------------------------------------------
         // Functions - Nomal
         // --------------------------------------------------
-        public void SetToCamera(Camera cam)
-        {
-            if (_camera == null)
-            {
-                _camera = cam;
-                return;
-            }
-        }
-
         public void ChangeToCurrentState(MiniGameBase.EState state)
         {
             if (_currentState == state)

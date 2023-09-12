@@ -29,12 +29,6 @@ namespace InGame.ForMiniGame
         // --------------------------------------------------
         // Functions - Nomal
         // --------------------------------------------------
-        // ----- Public
-        public void SetToCamera(Camera cam)
-        {
-            _controller.SetToCamera(cam);
-        }
-
         // ----- Private
         private void _ChangeStateToPlay() 
         {
@@ -71,7 +65,9 @@ namespace InGame.ForMiniGame
                 {
                     Loader.Instance.Visiable
                     (
-                        3f, () => { StateMachine.Instance.ChangeState(ForState.EState.Ready, null); }
+                        3f, 
+                        () => { StateMachine.Instance.ChangeState(ForState.EState.Ready, null); },
+                        null
                     );
                 }
             );
@@ -156,7 +152,7 @@ namespace InGame.ForMiniGame
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
-
+            //_captureSystem.
             doneCallBack?.Invoke();
             yield return null;
         }

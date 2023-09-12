@@ -25,7 +25,7 @@ namespace InGame.ForState.ForUI
         
         }
 
-        public override void OnFinishi()
+        public override void OnFinish()
         {
         
         }

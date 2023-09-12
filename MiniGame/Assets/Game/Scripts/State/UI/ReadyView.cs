@@ -1,9 +1,15 @@
 // ----- C#
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 // ----- Unity
 using UnityEngine;
+using UnityEngine.UI;
+
+// ----- User Defined
+using InGame.ForMiniGame.ForUI;
+using InGame.ForMiniGame;
 
 namespace InGame.ForState.ForUI
 {
@@ -12,6 +18,8 @@ namespace InGame.ForState.ForUI
         // --------------------------------------------------
         // Components
         // --------------------------------------------------
+        [SerializeField] private List<MiniGameUnit> _miniGameUnitList = null;
+        [SerializeField] private Button             _BTN_Gallery      = null;
 
         // --------------------------------------------------
         // Variables
@@ -20,14 +28,16 @@ namespace InGame.ForState.ForUI
         // --------------------------------------------------
         // Functions - Nomal
         // --------------------------------------------------
-        public override void OnInit()
-        {
-        
-        }
+        public override void OnInit()   { }
+        public override void OnFinish() { }
 
-        public override void OnFinishi()
+        public void SetToMiniGameUnit(Action<EMiniGameType> onClickBtnEvent)
         {
-        
+            for (int i = 0; i < _miniGameUnitList.Count; i++) 
+            { 
+                var unit     = _miniGameUnitList[i];
+                unit.SetOnClickEvent(onClickBtnEvent);
+            }
         }
     }
 }
