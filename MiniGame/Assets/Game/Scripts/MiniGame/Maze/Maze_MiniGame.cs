@@ -30,9 +30,24 @@ namespace InGame.ForMiniGame
         // Functions - Nomal
         // --------------------------------------------------
         // ----- Private
-        private void _ChangeStateToPlay  () => ChangeState(EState.Play,   null);
-        private void _ChangeStateToFail  () => ChangeState(EState.Fail,   null);
-        private void _ChangeStateToFinish() => ChangeState(EState.Finish, null);
+        private void _ChangeStateToPlay() 
+        {
+            _controller.SetToStart(true);
+            _gameView.  VisiableToTutorial(false);
+            
+            ChangeState(EState.Play, null);
+        }
+
+        private void _ChangeStateToFail() 
+        {
+            _controller.SetToStart(false);
+            ChangeState(EState.Fail, null);
+        } 
+        private void _ChangeStateToFinish()
+        {
+            _controller.SetToStart(false);
+            ChangeState(EState.Finish, null);
+        }
 
         // --------------------------------------------------
         // Functions - Coroutine
@@ -91,10 +106,18 @@ namespace InGame.ForMiniGame
             (
                 TimerSystem.ECountType.CountDown,
                 _gameDuration,
-                () => { Debug.Log($"Game ENd"); }
+                () => { ChangeState(EState.Fail, null); }
             );
 
-            // Play Logic 활성화
+            doneCallBack?.Invoke();
+            yield return null;
+        }
+
+        protected override IEnumerator _Co_Finish(Action doneCallBack)
+        {
+            Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
+
+            _controlView.StopTimer();
 
             doneCallBack?.Invoke();
             yield return null;

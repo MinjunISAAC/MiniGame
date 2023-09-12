@@ -28,6 +28,8 @@ namespace InGame.ForMiniGame.ForUI
             _timerSystem.SetToTimer(sec);
 
         public void PlayTimer(TimerSystem.ECountType countType, float duration, Action doneCallBack) =>
-            _timerSystem.Timer(countType, duration, doneCallBack);
+            _timerSystem.PlayTimer(countType, duration, doneCallBack);
+
+        public void StopTimer() => _timerSystem.StopTimer();
     }
 }

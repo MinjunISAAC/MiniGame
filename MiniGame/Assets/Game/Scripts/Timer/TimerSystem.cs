@@ -38,7 +38,7 @@ namespace InGame.ForMiniGame.ForUI
             _TMP_Contents.text = string.Format("{0:00}", duration) + $":00.00";
         }
 
-        public void Timer(ECountType countType, float duration, Action doneCallBack) 
+        public void PlayTimer(ECountType countType, float duration, Action doneCallBack) 
         {
             if (_co_Timer != null)
                 return;
@@ -48,7 +48,15 @@ namespace InGame.ForMiniGame.ForUI
                 case ECountType.CountUp:   _co_Timer = StartCoroutine(_Co_Timer(ECountType.CountUp,   duration, doneCallBack)); break;
                 case ECountType.CountDown: _co_Timer = StartCoroutine(_Co_Timer(ECountType.CountDown, duration, doneCallBack)); break;
             }
-        } 
+        }
+
+        public void StopTimer() 
+        { 
+            if (_co_Timer != null)
+            {
+                StopCoroutine(_co_Timer);
+            }
+        }
 
         // --------------------------------------------------
         // Functions - Coroutine

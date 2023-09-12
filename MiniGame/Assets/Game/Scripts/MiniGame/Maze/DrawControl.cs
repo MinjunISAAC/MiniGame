@@ -31,16 +31,14 @@ namespace InGame.ForMiniGame.ForControl
         
         private LineCollider _lineCollider = null;
 
-        private Vector3 _inputPos = Vector3.zero;
-        private Vector3 _prevPos  = Vector3.zero;
+        private Vector3      _inputPos     = Vector3.zero;
+        private Vector3      _prevPos      = Vector3.zero;
 
-        private bool _isStart = false;
-        private bool _isEnd   = false;
-        private bool _isDrag  = false;
+        private GameObject   _line         = null;
 
-        private GameObject _line = null;
+        private bool         _isStart      = false;
 
-        private int _lineCount = 2;
+        private int          _lineCount    = 2;
 
         // --------------------------------------------------
         // Functions - Nomal
@@ -50,16 +48,9 @@ namespace InGame.ForMiniGame.ForControl
         {
             _DrawLine();
         }
-        
-        protected override void UpdateToSuccess() 
-        { 
-        
-        }
-        
-        protected override void UpdateToFail() 
-        { 
-        
-        }
+
+        // ----- Public
+        public void SetToStart(bool isStart) => _isStart = isStart;
 
         // ----- Private
         private void _DrawLine()
@@ -72,18 +63,16 @@ namespace InGame.ForMiniGame.ForControl
 
             if (Input.GetMouseButtonDown(0))
             {
-                _isDrag = true;
                 _CreateLine(mousePos);
             }
 
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && _isStart)
             {
                 _ConnectLine(mousePos);
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                _isDrag       = false;
                 _prevPos      = Vector3.zero;
                 _inputPos     = Vector3.zero;
                 _lineCount    = 2;
@@ -113,6 +102,7 @@ namespace InGame.ForMiniGame.ForControl
             lineRenderer.numCornerVertices = _lineVertices;
             lineRenderer.numCapVertices    = _lineVertices;
             lineRenderer.material          = _lineMaterial;
+            lineRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
             lineRenderer.SetPosition(0, mousePosition);
             lineRenderer.SetPosition(1, mousePosition);
