@@ -41,6 +41,15 @@ namespace InGame.ForMiniGame
             _currentMiniGame.ChangeState(MiniGameBase.EState.Init, null);
         }
 
+        public void ClearToMiniGame()
+        {
+            if (_currentMiniGame == null)
+                return;
+
+            Destroy(_currentMiniGame.gameObject);
+            _currentMiniGame = null;
+        }
+
         // ----- Private
         private MiniGameBase _GetToMiniGame(EMiniGameType miniGameType)
         {

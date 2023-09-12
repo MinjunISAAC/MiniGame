@@ -65,8 +65,11 @@ namespace InGame.ForMiniGame
                 {
                     Loader.Instance.Visiable
                     (
-                        3f, 
-                        () => { StateMachine.Instance.ChangeState(ForState.EState.Ready, null); },
+                        1f, 
+                        () => 
+                        { 
+                            StateMachine.Instance.ChangeState(ForState.EState.Ready, null); 
+                        },
                         null
                     );
                 }
