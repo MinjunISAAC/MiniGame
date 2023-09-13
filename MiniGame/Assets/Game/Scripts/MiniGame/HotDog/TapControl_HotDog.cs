@@ -15,7 +15,7 @@ namespace InGame.ForMiniGame.ForControl
         // Components
         // --------------------------------------------------
         [Header("Game Rule")]
-        [SerializeField] private int       _hotDogCount      = 0;
+        [SerializeField] private int       _clearCount       = 0;
         
         [Header("Image Group")]
         [SerializeField] private Image     _IMG_HotDogOrigin = null;
@@ -23,6 +23,11 @@ namespace InGame.ForMiniGame.ForControl
         [Header("Position Group")]
         [SerializeField] private Transform _hotDogParents    = null;
         [SerializeField] private Transform _hotDogTarget     = null;
+
+        // --------------------------------------------------
+        // Variables
+        // --------------------------------------------------
+        private int _hotDogCount = 0;
 
         // --------------------------------------------------
         // Functions - Nomal
@@ -43,6 +48,15 @@ namespace InGame.ForMiniGame.ForControl
                 hotDog.transform.position = imgPos;
                 StartCoroutine(_Co_MoveToHotDog(hotDog.GetComponent<RectTransform>(), 0.25f, null));
             }
+        }
+
+        // ----- Private
+        private void CountToRuleCount()
+        {
+            if (_clearCount > _hotDogCount) _hotDogCount++;
+            else                            _hotDogCount = _clearCount;
+
+
         }
 
         // --------------------------------------------------

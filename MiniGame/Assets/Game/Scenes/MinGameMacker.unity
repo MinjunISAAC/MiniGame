@@ -4952,7 +4952,7 @@ MonoBehaviour:
   _finishParticle: {fileID: 73615198}
   _gameDuration: 10
   _controller: {fileID: 6362674797402332661}
-  _controlView: {fileID: 6362674796724699090}
+  _controlView: {fileID: 0}
   _camController: {fileID: 2013951210}
 --- !u!1 &6362674796620635767
 GameObject:
@@ -5041,7 +5041,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6362674796724699088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fe1748d15cd9044b82132748228fb49, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d9d94c6537f7a04891310fe7d317170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _countDownAnim: {fileID: 6362674797306297907}
@@ -5049,6 +5049,7 @@ MonoBehaviour:
   _failAnim: {fileID: 393507543}
   _BTN_Close: {fileID: 6362674795745524955}
   _timerSystem: {fileID: 1065178844}
+  _TMP_Count: {fileID: 904862568}
 --- !u!1 &6362674796740212024
 GameObject:
   m_ObjectHideFlags: 0
@@ -5909,6 +5910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 6006586672908130185}
   _tapInterval: 0
+  _clearCount: 0
   _IMG_HotDogOrigin: {fileID: 2211916845159014679, guid: bc91d39bbe967e54e9c5f691486cdf40, type: 3}
   _hotDogParents: {fileID: 1603039922}
   _hotDogTarget: {fileID: 341504971}

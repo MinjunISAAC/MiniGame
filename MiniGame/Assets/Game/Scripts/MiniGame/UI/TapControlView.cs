@@ -15,7 +15,7 @@ namespace InGame.ForMiniGame.ForUI
         // --------------------------------------------------
         // Components
         // --------------------------------------------------
-        [SerializeField] private TimerSystem _timerSystem = null;
+        [SerializeField] protected TimerSystem _timerSystem = null;
 
         // --------------------------------------------------
         // Variables
