@@ -4681,7 +4681,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'EAT 60 HOTDOGS!
+  m_text: 'EAT 50 HOTDOGS!
 
     IN 10 SECONEDS!'
   m_isRightToLeft: 0
@@ -5914,7 +5914,7 @@ MonoBehaviour:
   _IMG_HotDogOrigin: {fileID: 2211916845159014679, guid: bc91d39bbe967e54e9c5f691486cdf40, type: 3}
   _hotDogParents: {fileID: 1603039922}
   _hotDogTarget: {fileID: 341504971}
-  _eatFx: {fileID: 0}
+  _eatFx: {fileID: 5322411534093296328, guid: 1b171c64c829dd144a54e36e1222ec8d, type: 3}
 --- !u!1 &6362674797446660777
 GameObject:
   m_ObjectHideFlags: 0

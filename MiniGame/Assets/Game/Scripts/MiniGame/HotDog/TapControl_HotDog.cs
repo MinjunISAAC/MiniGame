@@ -15,14 +15,14 @@ namespace InGame.ForMiniGame.ForControl
         // Components
         // --------------------------------------------------
         [Header("Image Group")]
-        [SerializeField] private Image     _IMG_HotDogOrigin = null;
+        [SerializeField] private Image          _IMG_HotDogOrigin = null;
 
         [Header("Position Group")]
-        [SerializeField] private Transform _hotDogParents    = null;
-        [SerializeField] private Transform _hotDogTarget     = null;
+        [SerializeField] private Transform      _hotDogParents    = null;
+        [SerializeField] private Transform      _hotDogTarget     = null;
 
         [Header("Effect Group")]
-        [SerializeField] private ParticleSystem _eatFx = null;
+        [SerializeField] private ParticleSystem _eatFx            = null;
 
         // --------------------------------------------------
         // Variables
@@ -77,6 +77,10 @@ namespace InGame.ForMiniGame.ForControl
             {
                 _CountToRuleCount();
                 viewRefreshAction(_hotDogCount);
+
+                var fx = Instantiate(_eatFx, _hotDogTarget);
+                fx.transform.localEulerAngles = Vector3.zero;
+                fx.Play();
             };
         }
 
