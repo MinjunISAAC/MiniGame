@@ -21,15 +21,15 @@ namespace InGame.ForMiniGame
         // Components
         // --------------------------------------------------
         [Header("Game Rule")]
-        [SerializeField] private float             _gameDuration  = 10f;
-        [SerializeField] private int               _clearCount    = 0;
+        [SerializeField] private float                 _gameDuration  = 10f;
+        [SerializeField] private int                   _clearCount    = 0;
 
         [Header("Control Group")]
         [SerializeField] private TapControl_HotDog     _controller    = null;
         [SerializeField] private TapControlView_HotDog _controlView   = null;
 
         [Header("Cam Group")]
-        [SerializeField] private CamController     _camController = null;
+        [SerializeField] private CamController         _camController = null;
 
         // --------------------------------------------------
         // Functions - Nomal
@@ -54,10 +54,7 @@ namespace InGame.ForMiniGame
                     Loader.Instance.Visiable
                     (
                         1f,
-                        () =>
-                        {
-                            StateMachine.Instance.ChangeState(ForState.EState.Ready, null);
-                        },
+                        () => { StateMachine.Instance.ChangeState(ForState.EState.Ready, null); },
                         null
                     );
                 }
@@ -70,19 +67,17 @@ namespace InGame.ForMiniGame
                     Loader.Instance.Visiable
                     (
                         1f,
-                        () =>
-                        {
-                            StateMachine.Instance.ChangeState(ForState.EState.Ready, null);
-                        },
+                        () => { StateMachine.Instance.ChangeState(ForState.EState.Ready, null); },
                         null
                     );
                 }
             );
 
             _controller .SetToClearCount(_clearCount);
-            _controlView.RefreshToCount (_clearCount);
-
-            _controller.SetToEatEvent((count) => _controlView.RefreshToCount(count));
+            _controller .SetToEatEvent  ((count) => _controlView.RefreshToCount(count));
+            
+            _controller .onStartEvent  += () => { _controlView.VisiableToTutorial(false); };
+            _controller .onFinishEvent += () => { ChangeState(EState.Success, null);      };
 
             ChangeState(EState.Intro, null);
 
@@ -96,7 +91,14 @@ namespace InGame.ForMiniGame
 
             _controlView.PlayToCountDown
             (
-                () => { ChangeState(EState.Play, null); }
+                () => 
+                { 
+                    _camController.Move
+                    (
+                        true, 0.25f,
+                        () => { ChangeState(EState.Play, null); }
+                    );
+                }
             );
 
             doneCallBack?.Invoke();
@@ -107,26 +109,23 @@ namespace InGame.ForMiniGame
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
-            _camController.Move
+            _controller    .SetToStart        (true);
+            
+            _charactorAnim .SetTrigger        (IDLE_TRIGGER);
+            
+            _controlView   .RefreshToCount    (0);
+            _controlView   .VisiableToTimer   (true);
+            _controlView   .SetToTimer        ((int)_gameDuration);
+            _controlView   .VisiableToTutorial(true);
+            _controlView   .PlayTimer
             (
-                true, 0.25f,
-                () => 
-                { 
-                    _controller.SetToStart(true);
-                    _charactorAnim.SetTrigger(IDLE_TRIGGER);
-                    _controlView.VisiableToTimer(true);
-                    _controlView.SetToTimer((int)_gameDuration);
-                    _controlView.VisiableToTutorial(true);
-                    _controlView.PlayTimer
-                    (
-                        TimerSystem.ECountType.SlideDown,
-                        _gameDuration,
-                        () => { ChangeState(EState.Fail, () => { _charactorAnim.ResetTrigger(IDLE_TRIGGER); }); }
-                    );
-                
-                    doneCallBack?.Invoke();
-                }
+                TimerSystem.ECountType.SlideDown,
+                _gameDuration,
+                () => { ChangeState(EState.Fail, () => { _charactorAnim.ResetTrigger(IDLE_TRIGGER); }); }
             );
+
+            doneCallBack?.Invoke();
+
             yield return null;
         }
 
@@ -134,13 +133,35 @@ namespace InGame.ForMiniGame
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
+            _controlView    .StopTimer ();
+            _finishParticle .Play      ();
+            _charactorAnim  .SetTrigger(SUCCESS_TRIGGER);
+            _camController  .Move      (false, 0.25f, null);
+
+            var delaySec = 3f;
+            yield return new WaitForSeconds(delaySec);
+
+            ChangeState(EState.Finish, null);
             doneCallBack?.Invoke();
+            
             yield return null;
         }
 
         protected override IEnumerator _Co_Fail(Action doneCallBack)
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
+
+            _controlView   .StopTimer           ();
+            _controller    .ResetToRuleCount    ();
+            _charactorAnim .SetTrigger          (FAIL_TRIGGER);
+            _gameView      .VisiableToFailEffect(true);
+
+            var delaySec = 1.5f;
+            yield return new WaitForSeconds(delaySec);
+
+            _gameView.VisiableToFailEffect(false);
+
+            ChangeState(EState.Play, () => { _charactorAnim.ResetTrigger(FAIL_TRIGGER); });
 
             doneCallBack?.Invoke();
             yield return null;
@@ -150,6 +171,13 @@ namespace InGame.ForMiniGame
         {
             Debug.Log($"<color=yellow>[MiniGame.ChangeState] {_gameState} State에 진입하였습니다. </color>");
 
+            
+
+            var capturePicture = _captureSystem.Capture();
+            
+            _captureView   .SetToCapturePhoto(capturePicture);
+            _finishParticle.Stop();
+            
             doneCallBack?.Invoke();
             yield return null;
         }

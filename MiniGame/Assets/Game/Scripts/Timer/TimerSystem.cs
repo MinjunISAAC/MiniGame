@@ -33,9 +33,12 @@ namespace InGame.ForMiniGame.ForUI
         // --------------------------------------------------
         // Variables
         // --------------------------------------------------
-        private Coroutine _co_Timer   = null;
+        private Coroutine _co_Timer    = null;
 
-        private float     _guageWidth = 0.0f;
+        private float     _guageWidth  = 0.0f;
+        private float     _guageOrigin = 0.0f;
+
+        private bool      _isInit      = false;
 
         // --------------------------------------------------
         // Functions - Nomal
@@ -43,6 +46,11 @@ namespace InGame.ForMiniGame.ForUI
         // ----- Setting
         public void SetToTimer(int duration = 0)   
         {
+            if (_isInit)
+                return;
+
+            _isInit = true;
+            
             // Text Type
             if (_RECT_Guage == null)
             {
@@ -51,7 +59,8 @@ namespace InGame.ForMiniGame.ForUI
             }
 
             // Slide Type
-            _guageWidth = _RECT_Guage.rect.size.x;
+            _guageOrigin = _RECT_Guage.rect.size.x;
+            _guageWidth  = _guageOrigin;
         }
         
         // ----- On/Off

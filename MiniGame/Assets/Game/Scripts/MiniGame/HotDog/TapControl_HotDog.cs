@@ -31,13 +31,27 @@ namespace InGame.ForMiniGame.ForControl
         private int _clearCount  = 0;
 
         // --------------------------------------------------
-        // Eat Event
+        // Event Group
         // --------------------------------------------------
-        public static event Action onEatEvent;
-        public static void OnEatAction()
+        public event Action onEatEvent;
+        public void OnEatAction()
         {
             if (onEatEvent != null)
                 onEatEvent();
+        }
+
+        public event Action onStartEvent;
+        public void OnStartAction()
+        {
+            if (onStartEvent != null)
+                onStartEvent();
+        }
+
+        public event Action onFinishEvent;
+        public void OnFinishAction()
+        {
+            if (onFinishEvent != null)
+                onFinishEvent();
         }
 
         // --------------------------------------------------
@@ -51,6 +65,8 @@ namespace InGame.ForMiniGame.ForControl
 
             if (Input.GetMouseButtonDown(0))
             {
+                OnStartAction();
+
                 var pos    = Input.mousePosition;
                     pos.z  = 1f;
                 var imgPos = Camera.main.ScreenToWorldPoint(pos);
@@ -84,11 +100,20 @@ namespace InGame.ForMiniGame.ForControl
             };
         }
 
+        public void ResetToRuleCount()
+        {
+            _hotDogCount = 0;
+        }
+
         // ----- Private
         private void _CountToRuleCount()
         {
             if (_clearCount > _hotDogCount) _hotDogCount++;
-            else                            _hotDogCount = _clearCount;
+            else 
+            { 
+                _hotDogCount = _clearCount;
+                OnFinishAction();
+            }
         }
 
         // --------------------------------------------------
