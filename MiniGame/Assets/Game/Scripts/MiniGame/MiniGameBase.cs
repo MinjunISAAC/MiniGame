@@ -67,35 +67,23 @@ namespace InGame.ForMiniGame
         // --------------------------------------------------
         public void ChangeState(EState gameState, Action doneCallBack)
         {
-            Debug.Log($"Call 0");
             if (!Enum.IsDefined(typeof(EState), _gameState))
             {
                 Debug.LogError($"[MiniControlBase.ChangeState] {Enum.GetName(typeof(EState), gameState)}은 정의되어있지 않은 Enum 값입니다.");
                 return;
             }
 
-            Debug.Log($"Call 1");
             if (_gameState == gameState)
-            {
-                Debug.Log($"Call 2");
                 return;
-            }
 
             _gameState = gameState;
 
             if (_controlBase != null)
-            {
                 _controlBase.ChangeToCurrentState(_gameState);
-                Debug.Log($"Call 3");
-            }
 
             if (_co_StateOwner != null)
-            {
                 StopCoroutine(_co_StateOwner);
-                Debug.Log($"Call 4");
-            }
 
-            Debug.Log($"Call 5");
             switch (_gameState)
             {
                 case EState.Init:    _co_StateOwner = StartCoroutine(_Co_Init(doneCallBack));    break;
