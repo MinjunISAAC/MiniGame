@@ -4951,8 +4951,9 @@ MonoBehaviour:
   _charactorAnim: {fileID: 6911044980679606705}
   _finishParticle: {fileID: 73615198}
   _gameDuration: 10
+  _clearCount: 50
   _controller: {fileID: 6362674797402332661}
-  _controlView: {fileID: 0}
+  _controlView: {fileID: 6362674796724699090}
   _camController: {fileID: 2013951210}
 --- !u!1 &6362674796620635767
 GameObject:
@@ -5910,10 +5911,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 6006586672908130185}
   _tapInterval: 0
-  _clearCount: 0
   _IMG_HotDogOrigin: {fileID: 2211916845159014679, guid: bc91d39bbe967e54e9c5f691486cdf40, type: 3}
   _hotDogParents: {fileID: 1603039922}
   _hotDogTarget: {fileID: 341504971}
+  _eatFx: {fileID: 0}
 --- !u!1 &6362674797446660777
 GameObject:
   m_ObjectHideFlags: 0

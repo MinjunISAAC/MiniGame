@@ -14,9 +14,6 @@ namespace InGame.ForMiniGame.ForControl
         // --------------------------------------------------
         // Components
         // --------------------------------------------------
-        [Header("Game Rule")]
-        [SerializeField] private int       _clearCount       = 0;
-        
         [Header("Image Group")]
         [SerializeField] private Image     _IMG_HotDogOrigin = null;
 
@@ -24,10 +21,24 @@ namespace InGame.ForMiniGame.ForControl
         [SerializeField] private Transform _hotDogParents    = null;
         [SerializeField] private Transform _hotDogTarget     = null;
 
+        [Header("Effect Group")]
+        [SerializeField] private ParticleSystem _eatFx = null;
+
         // --------------------------------------------------
         // Variables
         // --------------------------------------------------
         private int _hotDogCount = 0;
+        private int _clearCount  = 0;
+
+        // --------------------------------------------------
+        // Eat Event
+        // --------------------------------------------------
+        public static event Action onEatEvent;
+        public static void OnEatAction()
+        {
+            if (onEatEvent != null)
+                onEatEvent();
+        }
 
         // --------------------------------------------------
         // Functions - Nomal
@@ -46,17 +57,34 @@ namespace InGame.ForMiniGame.ForControl
                 var hotDog = Instantiate(_IMG_HotDogOrigin, _hotDogParents);
 
                 hotDog.transform.position = imgPos;
-                StartCoroutine(_Co_MoveToHotDog(hotDog.GetComponent<RectTransform>(), 0.25f, null));
+                StartCoroutine(_Co_MoveToHotDog(hotDog.GetComponent<RectTransform>(), 0.25f, OnEatAction));
             }
         }
 
         // ----- Private
-        private void CountToRuleCount()
+        public void SetToClearCount(int count)
+        {
+            if (_clearCount != 0)
+                return;
+            
+            _clearCount = count;
+        }
+
+        public void SetToEatEvent(Action<int> viewRefreshAction)
+        {
+            onEatEvent +=
+            () =>
+            {
+                _CountToRuleCount();
+                viewRefreshAction(_hotDogCount);
+            };
+        }
+
+        // ----- Private
+        private void _CountToRuleCount()
         {
             if (_clearCount > _hotDogCount) _hotDogCount++;
             else                            _hotDogCount = _clearCount;
-
-
         }
 
         // --------------------------------------------------

@@ -21,14 +21,15 @@ namespace InGame.ForMiniGame
         // Components
         // --------------------------------------------------
         [Header("Game Rule")]
-        [SerializeField] private float          _gameDuration  = 10f;
+        [SerializeField] private float             _gameDuration  = 10f;
+        [SerializeField] private int               _clearCount    = 0;
 
         [Header("Control Group")]
-        [SerializeField] private TapControl     _controller    = null;
-        [SerializeField] private TapControlView _controlView   = null;
+        [SerializeField] private TapControl_HotDog     _controller    = null;
+        [SerializeField] private TapControlView_HotDog _controlView   = null;
 
         [Header("Cam Group")]
-        [SerializeField] private CamController  _camController = null;
+        [SerializeField] private CamController     _camController = null;
 
         // --------------------------------------------------
         // Functions - Nomal
@@ -44,7 +45,7 @@ namespace InGame.ForMiniGame
 
             _gameView    = (GameView)           _controlView;
             _controlBase = (MiniGameControlBase)_controller;
-            
+
             _controlView.VisiableToTimer(false);
             _controlView.SetToCloseButton
             (
@@ -78,6 +79,11 @@ namespace InGame.ForMiniGame
                 }
             );
 
+            _controller .SetToClearCount(_clearCount);
+            _controlView.RefreshToCount (_clearCount);
+
+            _controller.SetToEatEvent((count) => _controlView.RefreshToCount(count));
+
             ChangeState(EState.Intro, null);
 
             doneCallBack?.Invoke();
@@ -90,10 +96,7 @@ namespace InGame.ForMiniGame
 
             _controlView.PlayToCountDown
             (
-                () =>
-                {
-                    ChangeState(EState.Play, null);
-                }
+                () => { ChangeState(EState.Play, null); }
             );
 
             doneCallBack?.Invoke();
